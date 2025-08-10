@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ahmad Balfaqih — Developer & Programmer</title>
+  <meta name="description" content="Ahmad Balfaqih — 13-year-old Saudi business-minded programmer. Builds games, websites, and smart systems.">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --accent:#7c3aed; --muted:#9aa4b2;
+      --glass: rgba(255,255,255,0.04); --radius:14px; --text:#e6eef8; --border:rgba(255,255,255,0.06);
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color-scheme: dark;
+    }
+    :root.light{ --bg:#f7f7fb; --card:#ffffff; --muted:#5b6573; --glass: rgba(0,0,0,0.04); --text:#171923; --border:rgba(0,0,0,0.08); color-scheme: light; }
+    :lang(ar){ font-family: "Tajawal", system-ui, -apple-system, "Segoe UI", Roboto, Arial; }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      line-height:1.5; padding:32px; display:flex; align-items:center; justify-content:center; font-size:16px;
+    }
+    .container{ width:100%; max-width:980px; background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));
+      border-radius:18px; padding:28px; box-shadow:0 10px 30px rgba(2,6,23,.12); display:grid; gap:20px;
+      grid-template-columns:1fr 360px; align-items:start; border:1px solid var(--border); }
+
+    .topbar{ grid-column:1/-1; display:flex; justify-content:flex-end; gap:8px; }
+    .chip{ background:var(--glass); border:1px solid var(--border); padding:8px 12px; border-radius:999px; cursor:pointer;
+      font-weight:600; font-size:13px; display:inline-flex; gap:8px; align-items:center; user-select:none; }
+
+    .hero{ padding:18px 0; }
+    .name{ display:flex; gap:12px; align-items:center; }
+    .avatar{ width:84px; height:84px; border-radius:14px; background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+      display:flex; align-items:center; justify-content:center; font-weight:800; font-size:28px; color:var(--accent); border:1px solid var(--border); flex:0 0 84px; }
+    h1{ margin:0; font-weight:800; font-size:26px; letter-spacing:.2px; }
+    .sub{ margin:6px 0 14px 0; color:var(--muted); font-size:14px; }
+
+    .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+    .tag{ background:var(--glass); padding:8px 10px; border-radius:999px; font-size:13px; color:var(--muted); border:1px solid var(--border); }
+
+    .about{ margin-top:16px; background:linear-gradient(180deg,rgba(255,255,255,.03),transparent); border-radius:12px; padding:14px; font-size:15px; border:1px solid var(--border); }
+
+    .skills{ display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; }
+    .skill{ background:linear-gradient(90deg,rgba(124,58,237,.12),rgba(124,58,237,.06)); color:#2f1a66; padding:10px 12px; border-radius:10px;
+      font-weight:700; font-size:13px; border:1px solid rgba(124,58,237,.18); }
+    :root:not(.light) .skill{ color:#e9ddff; }
+
+    .sections{ display:grid; gap:12px; margin-top:18px; }
+    .card{ background:rgba(255,255,255,.02); border-radius:12px; padding:12px; border:1px solid var(--border); }
+    .card h3{ margin:0 0 8px 0; font-size:16px; }
+    .card p{ margin:0; color:var(--muted); font-size:14px; }
+
+    .side{ position:relative; margin-inline-start:6px; }
+    .stat{ display:flex; gap:12px; align-items:center; margin-bottom:12px; background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));
+      padding:12px; border-radius:12px; border:1px solid var(--border); }
+    .stat .num{ font-weight:800; font-size:20px; color:var(--accent) }
+    .cta{ margin-top:14px; display:flex; gap:10px; flex-direction:column; }
+    .btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 14px; border-radius:12px; text-decoration:none;
+      font-weight:800; border:1px solid var(--border); cursor:pointer; }
+    .btn-primary{ background:linear-gradient(90deg,var(--accent),#5b21b6); color:white; box-shadow:0 6px 18px rgba(124,58,237,.18); }
+    .btn-ghost{ background:transparent; color:var(--accent); border:1px dashed rgba(124,58,237,.36) }
+
+    footer{ grid-column:1/-1; display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:6px; color:var(--muted); font-size:13px; }
+
+    .modal-backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.5); display:none; align-items:center; justify-content:center; padding:24px; z-index:50; }
+    .modal{ width:min(520px,100%); background:var(--card); color:var(--text); border-radius:16px; padding:20px; border:1px solid var(--border);
+      box-shadow:0 24px 60px rgba(2,6,23,.45); }
+    .modal header{ display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+    .close-x{ background:transparent; border:0; font-size:22px; cursor:pointer; color:var(--muted); }
+    .contact-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px dashed var(--border); }
+    .contact-row:last-child{ border-bottom:0; }
+    .copy-btn{ border:1px solid var(--border); background:var(--glass); border-radius:10px; padding:6px 10px; cursor:pointer; font-weight:700; }
+
+    .kpis{ display:grid; gap:12px; margin-top:12px; }
+    .kpi{ display:flex; align-items:center; justify-content:space-between; padding:12px; border:1px solid var(--border); border-radius:12px; background:rgba(255,255,255,.02); }
+    .kpi .label{ color:var(--muted); font-size:13px; }
+    .kpi .value{ font-size:22px; font-weight:900; color:var(--accent); min-width:6ch; text-align:end; }
+
+    @media (max-width:880px){ body{padding:18px} .container{grid-template-columns:1fr; padding:18px} .side{order:2} .topbar{justify-content:center} }
+    [dir="ltr"] .name{ flex-direction:row } [dir="rtl"] .name{ flex-direction:row-reverse }
+    [dir="ltr"] .side{ margin-inline-start:6px } [dir="rtl"] .side{ margin-inline-end:6px }
+  </style>
+</head>
+<body>
+  <main class="container" role="main" aria-labelledby="main-title">
+    <div class="topbar" role="toolbar" aria-label="Preferences">
+      <button class="chip" id="langToggle" aria-label="Toggle language">🌐 <span data-i18n="lang_btn">English</span></button>
+      <button class="chip" id="themeToggle" aria-label="Toggle light/dark">🌓 <span data-i18n="theme_btn">الوضع الفاتح</span></button>
+    </div>
+
+    <section class="hero" aria-labelledby="main-title">
+      <div class="name" role="heading" aria-level="1">
+        <div class="avatar" aria-hidden="true">A</div>
+        <div>
+          <h1 id="main-title" data-i18n="name">أحمد بلفقيه</h1>
+          <div class="sub" data-i18n="subtitle">مهتم بالأعمال · مبرمج · من السعودية · 13 سنة</div>
+          <div class="tags">
+            <span class="tag" data-i18n="tag_prog">🧑‍💻 مبرمج — 7+ لغات</span>
+            <span class="tag" data-i18n="tag_web">🌐 مطوّر مواقع</span>
+            <span class="tag" data-i18n="tag_games">🎮 مطوّر ألعاب</span>
+            <span class="tag" data-i18n="tag_3d">🏗️ نمذجة وتصميم ثلاثي الأبعاد</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="about" aria-label="About Ahmad">
+        <strong data-i18n="hello">مرحباً — أنا أحمد.</strong>
+        <p style="margin-top:8px" data-i18n="about">
+          أنا سعودي عمري 13 سنة. أحب بناء أشياء مفيدة وجميلة: مواقع، ألعاب، وأتمتة مهام ذكية.
+          أبرمج بأكثر من 7 لغات وأهتم بالتفاصيل وتجربة المستخدم.
+        </p>
+      </div>
+
+      <div class="sections">
+        <div class="card" aria-labelledby="skills-title">
+          <h3 id="skills-title" data-i18n="skills_title">المهارات التقنية</h3>
+          <div class="skills" role="list">
+            <div class="skill" role="listitem">JavaScript</div>
+            <div class="skill" role="listitem">HTML &amp; CSS</div>
+            <div class="skill" role="listitem">Python</div>
+            <div class="skill" role="listitem">Lua</div>
+            <div class="skill" role="listitem" data-i18n="skill_build">3D Modeling &amp; Building</div>
+            <div class="skill" role="listitem" data-i18n="skill_more">+2 لغات أخرى</div>
+          </div>
+        </div>
+
+        <div class="card" aria-labelledby="work-title">
+          <h3 id="work-title" data-i18n="projects_title">أهم الأعمال</h3>
+          <p data-i18n="projects_desc">
+            • مواقع سريعة ومتجاوبة. <br>
+            • ألعاب وتجارب تفاعلية. <br>
+            • نماذج ثلاثية الأبعاد وأنظمة أتمتة ذكية.
+          </p>
+          <div class="kpis" aria-label="Highlights">
+            <div class="kpi">
+              <div class="label" data-i18n="visits_label">إجمالي زيارات الألعاب</div>
+              <div class="value" id="visitsCounter" data-target="5200000" data-format="compact">0</div>
+            </div>
+            <div class="kpi">
+              <div class="label" data-i18n="profit_label">إجمالي أرباح الأعمال</div>
+              <div class="value" id="profitCounter" data-target="5000" data-format="compact-dollar">0</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="side" aria-label="Sidebar">
+      <div class="stat">
+        <div style="flex:1">
+          <div style="font-size:13px;color:var(--muted)" data-i18n="age_label">العمر</div>
+          <div class="num">13</div>
+        </div>
+      </div>
+
+      <div class="stat">
+        <div style="flex:1">
+          <div style="font-size:13px;color:var(--muted)" data-i18n="xp_label">سنوات خبرة في البرمجة</div>
+          <div class="num">4</div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:6px">
+        <h3 data-i18n="what_i_do_title">ماذا أفعل</h3>
+        <p style="margin-top:6px;color:var(--muted)" data-i18n="what_i_do_desc">
+          أبني مواقع، أنظمة صغيرة، وألعاب. أركز على الأداء والتجربة النظيفة.
+        </p>
+
+        <div class="cta" role="group" aria-label="Actions">
+          <a class="btn btn-primary" href="#" id="contactBtn">📨 <span data-i18n="contact_btn">تواصل معي</span></a>
+          <a class="btn btn-ghost" href="#" id="resumeBtn">⬇️ <span data-i18n="resume_btn">تحميل نبذة (PDF)</span></a>
+        </div>
+      </div>
+    </aside>
+
+    <footer>
+      <div data-i18n="footer_left">أحمد بلفقيه — المملكة العربية السعودية 🇸🇦</div>
+      <div data-i18n="footer_right">صُنع بحب • مبرمج</div>
+    </footer>
+  </main>
+
+  <!-- Contact Modal -->
+  <div class="modal-backdrop" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+    <div class="modal">
+      <header>
+        <h3 id="contactTitle" data-i18n="contact_title">معلومات التواصل</h3>
+        <button class="close-x" id="closeModal" aria-label="Close">✕</button>
+      </header>
+      <div class="contact-row">
+        <div>
+          <div style="font-weight:800">Email</div>
+          <div>ahmadalawiba999@gmail.com</div>
+        </div>
+        <button class="copy-btn" data-copy="email" data-i18n="copy_btn">نسخ</button>
+      </div>
+      <div class="contact-row">
+        <div>
+          <div style="font-weight:800" data-i18n="phone">Phone</div>
+          <div dir="ltr">0538128499</div>
+        </div>
+        <button class="copy-btn" data-copy="phone" data-i18n="copy_btn">نسخ</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Helpers
+    const $ = (s, r=document)=>r.querySelector(s);
+    const $$ = (s, r=document)=>Array.from(r.querySelectorAll(s));
+
+    // --- State (define first to avoid reference errors)
+    let currentLang = localStorage.getItem('lang') || 'ar';
+    let currentTheme = localStorage.getItem('theme') ||
+      (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+
+    // --- i18n dict
+    const dict = {
+      ar:{lang_btn:"English",theme_btn:"الوضع الفاتح",name:"أحمد بلفقيه",subtitle:"مهتم بالأعمال · مبرمج · من السعودية · 13 سنة",
+          tag_prog:"🧑‍💻 مبرمج — 7+ لغات",tag_web:"🌐 مطوّر مواقع",tag_games:"🎮 مطوّر ألعاب",tag_3d:"🏗️ نمذجة وتصميم ثلاثي الأبعاد",
+          hello:"مرحباً — أنا أحمد.",about:"أنا سعودي عمري 13 سنة. أحب بناء أشياء مفيدة وجميلة: مواقع، ألعاب، وأتمتة مهام ذكية. أبرمج بأكثر من 7 لغات وأهتم بالتفاصيل وتجربة المستخدم.",
+          skills_title:"المهارات التقنية",skill_build:"نمذجة وبناء ثلاثي الأبعاد",skill_more:"+2 لغات أخرى",
+          projects_title:"أهم الأعمال",projects_desc:"• مواقع سريعة ومتجاوبة. <br> • ألعاب وتجارب تفاعلية. <br> • نماذج ثلاثية الأبعاد وأنظمة أتمتة ذكية.",
+          visits_label:"إجمالي زيارات الألعاب",profit_label:"إجمالي أرباح الأعمال",
+          age_label:"العمر",xp_label:"سنوات خبرة في البرمجة",
+          what_i_do_title:"ماذا أفعل",what_i_do_desc:"أبني مواقع، أنظمة صغيرة، وألعاب. أركز على الأداء والتجربة النظيفة.",
+          contact_btn:"تواصل معي",resume_btn:"تحميل نبذة (PDF)",
+          footer_left:"أحمد بلفقيه — المملكة العربية السعودية 🇸🇦",footer_right:"صُنع بحب • مبرمج",
+          contact_title:"معلومات التواصل",copy_btn:"نسخ",phone:"الهاتف"},
+      en:{lang_btn:"العربية",theme_btn:"Light mode",name:"Ahmad Balfaqih",subtitle:"Business-minded · Programmer · Saudi · 13 y/o",
+          tag_prog:"🧑‍💻 Programmer — 7+ languages",tag_web:"🌐 Web Developer",tag_games:"🎮 Game Developer",tag_3d:"🏗️ 3D Modeling",
+          hello:"Hi — I'm Ahmad.",about:"I'm a 13-year-old from Saudi Arabia. I build useful, beautiful things: websites, games, and smart automations. I code in 7+ languages and care about UX details.",
+          skills_title:"Technical Skills",skill_build:"3D Modeling & Building",skill_more:"+2 other languages",
+          projects_title:"Key Projects",projects_desc:"• Fast, responsive websites. <br> • Interactive games and experiences. <br> • 3D models and smart automations.",
+          visits_label:"Total Game Visits",profit_label:"Total Business Profit",
+          age_label:"Age",xp_label:"Years of Coding",
+          what_i_do_title:"What I Do",what_i_do_desc:"I build websites, small systems, and games. I focus on performance and clean UX.",
+          contact_btn:"Contact Me",resume_btn:"Download Resume (PDF)",
+          footer_left:"Ahmad Balfaqih — Saudi Arabia 🇸🇦",footer_right:"Made with ❤️ • Programmer",
+          contact_title:"Contact Info",copy_btn:"Copy",phone:"Phone"}
+    };
+
+    // --- Language apply
+    function applyLang(lang){
+      currentLang = lang;
+      const d = dict[lang];
+      $$('[data-i18n]').forEach(el=>{
+        const k = el.getAttribute('data-i18n');
+        if(d[k]) (k==='projects_desc') ? el.innerHTML = d[k] : el.textContent = d[k];
+      });
+      document.documentElement.lang = lang;
+      document.documentElement.dir = (lang==='ar') ? 'rtl' : 'ltr';
+      localStorage.setItem('lang', lang);
+      // update theme button label to match lang + current theme
+      $('#themeToggle [data-i18n="theme_btn"]').textContent =
+        (lang==='ar')
+          ? (currentTheme==='light' ? 'الوضع الداكن' : 'الوضع الفاتح')
+          : (currentTheme==='light' ? 'Dark mode' : 'Light mode');
+    }
+
+    // --- Theme apply
+    function applyTheme(theme){
+      currentTheme = theme;
+      document.documentElement.classList.toggle('light', theme==='light');
+      localStorage.setItem('theme', theme);
+      // update label in current language
+      $('#themeToggle [data-i18n="theme_btn"]').textContent =
+        (currentLang==='ar')
+          ? (theme==='light' ? 'الوضع الداكن' : 'الوضع الفاتح')
+          : (theme==='light' ? 'Dark mode' : 'Light mode');
+    }
+
+    // Initial apply (order matters!)
+    applyLang(currentLang);
+    applyTheme(currentTheme);
+
+    // --- Controls
+    $('#langToggle').addEventListener('click', ()=> applyLang(currentLang==='ar' ? 'en' : 'ar'));
+    $('#themeToggle').addEventListener('click', ()=> applyTheme(currentTheme==='light' ? 'dark' : 'light'));
+
+    // --- Contact modal
+    const contactBtn = $("#contactBtn"), modal = $("#contactModal"), closeModalBtn = $("#closeModal");
+    function openModal(){ modal.style.display='flex'; closeModalBtn.focus(); document.body.style.overflow='hidden'; }
+    function closeModal(){ modal.style.display='none'; document.body.style.overflow=''; contactBtn.focus(); }
+    contactBtn.addEventListener('click', e=>{ e.preventDefault(); openModal(); });
+    closeModalBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape' && modal.style.display==='flex') closeModal(); });
+
+    // Copy buttons
+    $$('.copy-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const t = btn.getAttribute('data-copy')==='email' ? 'ahmadalawiba999@gmail.com' : '0538128499';
+        navigator.clipboard.writeText(t).then(()=>{
+          const old = btn.textContent;
+          btn.textContent = (currentLang==='ar') ? 'تم!' : 'Copied!';
+          setTimeout(()=> btn.textContent = dict[currentLang].copy_btn, 900);
+        });
+      });
+    });
+
+    // Resume placeholder
+    $("#resumeBtn").addEventListener('click', e=>{
+      e.preventDefault();
+      alert(currentLang==='ar' ? "لو حاب أجهز لك سيرة ذاتية PDF، قُلّي." : "If you want a PDF resume, tell me and I’ll create one.");
+    });
+
+    // --- Counters
+    function easeOutCubic(t){ return 1 - Math.pow(1 - t, 3); }
+    function formatValue(val, fmt){
+      if(fmt==='compact') return Intl.NumberFormat('en',{notation:'compact',maximumFractionDigits:1}).format(val);
+      if(fmt==='compact-dollar') return Intl.NumberFormat('en',{notation:'compact',maximumFractionDigits:0}).format(val) + '$';
+      return String(val);
+    }
+    function animateCount(el, target, duration=1600, fmt='compact'){
+      const start = performance.now();
+      const startVal = 0;
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+        el.textContent = formatValue(target, fmt); return;
+      }
+      function step(now){
+        const t = Math.min(1, (now - start)/duration);
+        const cur = Math.floor(startVal + (target - startVal) * easeOutCubic(t));
+        el.textContent = formatValue(cur, fmt);
+        if(t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    const io = new IntersectionObserver(es=>{
+      es.forEach(en=>{
+        if(en.isIntersecting){
+          const el = en.target, target = parseInt(el.getAttribute('data-target'),10);
+          animateCount(el, target, 1600, el.getAttribute('data-format')||'compact');
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.4 });
+    ['visitsCounter','profitCounter'].forEach(id=>{ const el = document.getElementById(id); if(el) io.observe(el); });
+  </script>
+</body>
+</html>
